@@ -177,12 +177,16 @@ function App() {
             <a href="#experience">experience</a>
             <a href="#stack">stack</a>
             <a href="#contact">contact</a>
+            <a
+              className="nav-resume"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              resume <span className="arrow">↓</span>
+            </a>
           </nav>
-          <div className="nav-status">
-            <span className="dot" />
-            <span className="status-text">AVAILABLE</span>
-            <span className="status-clock">{clock}</span>
-          </div>
+          <span className="status-clock">{clock}</span>
         </div>
       </header>
 
@@ -191,7 +195,7 @@ function App() {
           <div className="hero-left">
             <div className="eyebrow">
               <span className="bracket">//</span>
-              SOFTWARE ENGINEER · AUCKLAND ↔ SYDNEY ↔ HONG KONG
+              SOFTWARE ENGINEER · AUCKLAND / SYDNEY
             </div>
             <h1 className="name">
               Rick Wang
@@ -214,39 +218,46 @@ function App() {
             </div>
           </div>
 
-          <aside className="hero-card" aria-label="System info">
-            <div className="card-head">
-              <span className="dot dot-amber" aria-hidden />
-              <span>SYSTEM_INFO.log</span>
-              <span className="card-head-spacer">0x01</span>
-            </div>
-            <dl className="kv">
-              <div className="kv-status">
-                <dt>status</dt>
-                <dd>open to '26/27 new grad</dd>
+          <div className="hero-side">
+            <aside className="status-card" aria-label="Availability">
+              <div className="card-head card-head-accent">
+                <span className="dot" aria-hidden />
+                <span>STATUS.log</span>
+                <span className="card-head-spacer">0x00</span>
               </div>
-              <div>
-                <dt>last</dt>
-                <dd>SWE Intern @ Jane Street</dd>
+              <p className="status-body">open to '26/27 new grad</p>
+            </aside>
+
+            <aside className="hero-card" aria-label="System info">
+              <div className="card-head">
+                <span className="dot dot-amber" aria-hidden />
+                <span>SYSTEM_INFO.log</span>
+                <span className="card-head-spacer">0x01</span>
               </div>
-              <div>
-                <dt>focus</dt>
-                <dd>systems · distributed · fintech</dd>
-              </div>
-              <div>
-                <dt>edu</dt>
-                <dd>USyd · CS Major / Cybersec Minor</dd>
-              </div>
-              <div>
-                <dt>awards</dt>
-                <dd>GS Caird · High Honour · Dean's List</dd>
-              </div>
-              <div>
-                <dt>atar</dt>
-                <dd>99.95</dd>
-              </div>
-            </dl>
-          </aside>
+              <dl className="kv">
+                <div>
+                  <dt>last</dt>
+                  <dd>SWE Intern @ Jane Street</dd>
+                </div>
+                <div>
+                  <dt>focus</dt>
+                  <dd>systems · distributed · fintech</dd>
+                </div>
+                <div>
+                  <dt>edu</dt>
+                  <dd>USyd · CS Major / Cybersec Minor</dd>
+                </div>
+                <div>
+                  <dt>awards</dt>
+                  <dd>GS Caird · High Honour · Dean's List</dd>
+                </div>
+                <div>
+                  <dt>wam</dt>
+                  <dd>86.63 / HD avg</dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
         </section>
 
         <section id="projects" className="section">
