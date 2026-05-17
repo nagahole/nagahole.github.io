@@ -1,121 +1,369 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useEffect, useState } from 'react'
 import './App.css'
 
+type Project = {
+  id: string
+  name: string
+  role: string
+  desc: string
+  stack: string[]
+  year: string
+  href: string
+  type: string
+}
+
+type ExperienceEntry = {
+  id: string
+  org: string
+  role: string
+  loc: string
+  period: string
+  desc: string
+}
+
+const projects: Project[] = [
+  {
+    id: '01',
+    name: 'Byte Blasters',
+    role: 'Topdown shooter',
+    desc: 'Arcade-style rogue-lite bullet-hell built solo over 15k+ lines of C#. Playable alpha on itch.io',
+    stack: ['Unity', 'C#'],
+    year: '2023',
+    href: 'https://nagahole.itch.io/byte-blasters-alpha-testing',
+    type: 'Game · Solo',
+  },
+  {
+    id: '02',
+    name: 'PocketWise',
+    role: 'Mobile finance tracker',
+    desc: 'Budget tracking with Google & Apple SSO, real-time persistence, and spending-trend analytics. Built end-to-end as a solo project.',
+    stack: ['React Native', 'Firebase', 'JavaScript'],
+    year: '2023',
+    href: 'https://github.com/nagahole/pocketwise',
+    type: 'Mobile · Solo',
+  },
+  {
+    id: '03',
+    name: 'CS Capstone (Advanced)',
+    role: 'ML image synthesis',
+    desc: 'Collaborative software project synthesising CT from MRI scans. Full SDLC under industry mentorship',
+    stack: ['Python', 'Machine Learning', 'GCP', 'Team'],
+    year: '2025',
+    href: 'https://github.com/COMP3988/COMP3988_F12_01',
+    type: 'Capstone · Team',
+  },
+  {
+    id: '04',
+    name: 'Scope',
+    role: 'Aim trainer',
+    desc: 'Solo-built indie aim trainer published on itch.io. Focused on tight feel and clean design.',
+    stack: ['Unity', 'C#'],
+    year: '2020',
+    href: 'https://nagahole.itch.io/scope',
+    type: 'Game · Solo',
+  },
+]
+
+const experience: ExperienceEntry[] = [
+  {
+    id: '01',
+    org: 'Jane Street',
+    role: 'Software Engineer Intern',
+    loc: 'Hong Kong',
+    period: 'Dec 2025 — Jan 2026',
+    desc: 'Backend systems in OCaml — RPC servers within latency-sensitive trading infrastructure. Contributed to a parallelisation initiative for internal computational throughput. Worked within strict code-review, testing, and reliability standards.',
+  },
+  {
+    id: '02',
+    org: 'University of Sydney',
+    role: 'Tutor — COMP2017 / COMP3221',
+    loc: 'Sydney',
+    period: 'Feb 2025 — Jul 2025',
+    desc: 'Weekly tutorials in Systems Programming (C) and Distributed Systems. Memory management, low-level addressing, threading, synchronisation, routing, consensus protocols, and blockchain security.',
+  },
+  {
+    id: '03',
+    org: 'SoleAgents',
+    role: 'Web Developer',
+    loc: 'Remote',
+    period: 'Jan 2025 — Present',
+    desc: 'Designed and deployed a WordPress real estate platform with subscription mailing lists, dynamic property filtering, and automated inquiry routing.',
+  },
+  {
+    id: '04',
+    org: 'University of Sydney',
+    role: 'Software Developer',
+    loc: 'Sydney',
+    period: 'Mar 2024 — Dec 2024',
+    desc: 'Built interactive chemistry simulations in Unity (C#) with biochemistry faculty — liquid transfer modelling pH/volume/concentration changes, with real-time 3D visual feedback.',
+  },
+]
+
+const stackGroups: { label: string; items: string[] }[] = [
+  {
+    label: 'languages',
+    items: ['OCaml', 'C', 'Python', 'C#', 'JavaScript', 'Java'],
+  },
+  {
+    label: 'systems',
+    items: [
+      'RPC',
+      'Distributed Systems',
+      'Multithreading',
+      'Synchronisation',
+      'Networking',
+      'Parallelisation',
+    ],
+  },
+  {
+    label: 'frameworks',
+    items: ['React', 'React Native', 'Firebase', 'Unity', 'WordPress'],
+  },
+]
+
+function useUtcClock() {
+  const [time, setTime] = useState(() => formatUtc(new Date()))
+  useEffect(() => {
+    const id = setInterval(() => setTime(formatUtc(new Date())), 1000)
+    return () => clearInterval(id)
+  }, [])
+  return time
+}
+
+function formatUtc(d: Date) {
+  const h = String(d.getUTCHours()).padStart(2, '0')
+  const m = String(d.getUTCMinutes()).padStart(2, '0')
+  const s = String(d.getUTCSeconds()).padStart(2, '0')
+  return `${h}:${m}:${s}Z`
+}
+
+function SectionHead({
+  num,
+  title,
+  hint,
+}: {
+  num: string
+  title: string
+  hint: string
+}) {
+  return (
+    <header className="section-head">
+      <span className="section-num">[{num}]</span>
+      <span className="section-bar" aria-hidden />
+      <h2 className="section-title">{title}</h2>
+      <span className="section-hint">// {hint}</span>
+    </header>
+  )
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const clock = useUtcClock()
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app">
+      <div className="grid-bg" aria-hidden />
+      <div className="scanlines" aria-hidden />
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <header className="nav">
+        <div className="nav-inner">
+          <a className="brand" href="#top">
+            <span className="brand-bracket">[</span>
+            <span className="brand-text">NAGAHOLE</span>
+            <span className="brand-bracket">]</span>
+            <span className="brand-version">v2026.1</span>
+          </a>
+          <nav className="nav-links">
+            <a href="#projects">projects</a>
+            <a href="#experience">experience</a>
+            <a href="#stack">stack</a>
+            <a href="#contact">contact</a>
+          </nav>
+          <div className="nav-status">
+            <span className="dot" />
+            <span className="status-text">AVAILABLE</span>
+            <span className="status-clock">{clock}</span>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <main className="main">
+        <section id="top" className="hero">
+          <div className="hero-left">
+            <div className="eyebrow">
+              <span className="bracket">//</span>
+              SOFTWARE ENGINEER · AUCKLAND ↔ SYDNEY ↔ HONG KONG
+            </div>
+            <h1 className="name">
+              Rick Wang
+              <span className="caret" aria-hidden>
+                _
+              </span>
+            </h1>
+            <p className="lede">
+              Systems engineer. Former SWE intern at <em>Jane Street</em>.
+              Looking for what's next in 2026/27.
+            </p>
+            <div className="hero-actions">
+              <a className="btn btn-primary" href="#projects">
+                <span>View Projects</span>
+                <span className="arrow">↗</span>
+              </a>
+              <a className="btn" href="mailto:rickwang121@gmail.com">
+                <span>Contact</span>
+              </a>
+            </div>
+          </div>
+
+          <aside className="hero-card" aria-label="System info">
+            <div className="card-head">
+              <span className="dot dot-amber" aria-hidden />
+              <span>SYSTEM_INFO.log</span>
+              <span className="card-head-spacer">0x01</span>
+            </div>
+            <dl className="kv">
+              <div className="kv-status">
+                <dt>status</dt>
+                <dd>open to '26/27 new grad</dd>
+              </div>
+              <div>
+                <dt>last</dt>
+                <dd>SWE Intern @ Jane Street</dd>
+              </div>
+              <div>
+                <dt>focus</dt>
+                <dd>systems · distributed · fintech</dd>
+              </div>
+              <div>
+                <dt>edu</dt>
+                <dd>USyd · CS Major / Cybersec Minor</dd>
+              </div>
+              <div>
+                <dt>awards</dt>
+                <dd>GS Caird · High Honour · Dean's List</dd>
+              </div>
+              <div>
+                <dt>atar</dt>
+                <dd>99.95</dd>
+              </div>
+            </dl>
+          </aside>
+        </section>
+
+        <section id="projects" className="section">
+          <SectionHead num="01" title="PROJECTS" hint="selected_builds" />
+          <div className="projects">
+            {projects.map((p) => (
+              <a
+                key={p.id}
+                className="project"
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className="project-head">
+                  <span className="project-id">{p.id}</span>
+                  <span className="project-type">{p.type}</span>
+                  <span className="project-year">{p.year}</span>
+                </div>
+                <h3 className="project-name">{p.name}</h3>
+                <p className="project-role">{p.role}</p>
+                <p className="project-desc">{p.desc}</p>
+                <ul className="project-stack">
+                  {p.stack.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ul>
+                <div className="project-cta">
+                  <span>VIEW</span>
+                  <span className="arrow">↗</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section id="experience" className="section">
+          <SectionHead num="02" title="EXPERIENCE" hint="recent_first" />
+          <ol className="exp">
+            {experience.map((e) => (
+              <li key={e.id} className="exp-item">
+                <div className="exp-marker">
+                  <span className="exp-id">{e.id}</span>
+                </div>
+                <div className="exp-body">
+                  <div className="exp-head">
+                    <h3 className="exp-role">{e.role}</h3>
+                    <span className="exp-period">{e.period}</span>
+                  </div>
+                  <div className="exp-meta">
+                    <span className="exp-org">{e.org}</span>
+                    <span className="exp-sep">·</span>
+                    <span className="exp-loc">{e.loc}</span>
+                  </div>
+                  <p className="exp-desc">{e.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="stack" className="section">
+          <SectionHead num="03" title="STACK" hint="tools_of_the_trade" />
+          {stackGroups.map((g) => (
+            <div key={g.label} className="stack-group">
+              <p className="stack-label">{g.label}</p>
+              <ul className="stack">
+                {g.items.map((s) => (
+                  <li key={s}>{s}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        <section id="contact" className="section">
+          <SectionHead num="04" title="CONTACT" hint="end_of_transmission" />
+          <div className="contact-grid">
+            <a className="contact-link" href="mailto:rickwang121@gmail.com">
+              <span className="contact-key">email</span>
+              <span className="contact-val">rickwang121@gmail.com</span>
+              <span className="arrow">↗</span>
+            </a>
+            <a
+              className="contact-link"
+              href="https://github.com/nagahole"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="contact-key">github</span>
+              <span className="contact-val">@nagahole</span>
+              <span className="arrow">↗</span>
+            </a>
+            <a
+              className="contact-link"
+              href="https://linkedin.com/in/rick-wang-nz"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="contact-key">linkedin</span>
+              <span className="contact-val">rick-wang-nz</span>
+              <span className="arrow">↗</span>
+            </a>
+            <div className="contact-link contact-static">
+              <span className="contact-key">location</span>
+              <span className="contact-val">Sydney / Auckland · GMT+11</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <div className="footer-inner">
+          <span>© {new Date().getFullYear()} RICK WANG</span>
+          <span className="footer-dim">/// END_OF_TRANSMISSION</span>
+        </div>
+      </footer>
+    </div>
   )
 }
 
