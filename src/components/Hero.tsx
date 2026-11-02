@@ -17,8 +17,9 @@ export default function Hero() {
           </span>
         </h1>
         <p className="lede">
-          Systems engineer. Former SWE intern at <em>Jane Street</em>. Looking
-          for what's next in 2026/27.
+          Software engineer at <em>Strala</em>, previously at{' '}
+          <em>Jane Street</em>. I like systems that have to be both fast and
+          correct, from distributed backtesting to market data parsing.
         </p>
         <div className="hero-actions">
           <a className="btn btn-primary" href="#projects">
