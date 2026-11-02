@@ -92,7 +92,7 @@ export const projects: Project[] = [
   {
     name: 'Byte Blasters',
     summary:
-      'A roguelike shooter I built solo over ten weeks: 16k lines of C# with modular weapons, node-graph enemy AI and a GPU fog of war.',
+      'A roguelike shooter I built solo over ten weeks: 16k lines of C# with modular weapons, node-graph enemy AI and a GPU fog of war. Shown at SXSW Sydney 2024.',
     tech: 'C#, Unity',
     year: '2023',
     links: [
