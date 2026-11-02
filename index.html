@@ -21,26 +21,14 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Rick Wang, software engineer in San Francisco" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#111112" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#060708" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <title>Rick Wang</title>
-    <script>
-      // Apply a saved theme before first paint so the page doesn't flash
-      try {
-        const theme = localStorage.getItem('theme')
-        if (theme === 'light' || theme === 'dark') {
-          document.documentElement.dataset.theme = theme
-        }
-      } catch {
-        // Storage unavailable; fall back to the system theme
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>

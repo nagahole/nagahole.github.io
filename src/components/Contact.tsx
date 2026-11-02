@@ -14,6 +14,12 @@ function copyWithSelection(text: string) {
   return ok
 }
 
+const links = [
+  { label: 'GitHub', href: profile.github },
+  { label: 'LinkedIn', href: profile.linkedin },
+  { label: 'Résumé', href: profile.resume },
+]
+
 export default function Contact() {
   const [copied, setCopied] = useState(false)
 
@@ -35,16 +41,15 @@ export default function Contact() {
 
   return (
     <div className="contact">
-      <p className="contact-lede reveal">
-        Email is the best way to reach me.
-      </p>
+      <p className="contact-statement label reveal">Email is the best way to reach me</p>
+
       <div className="email-row reveal">
-        <a className="link email" href={`mailto:${profile.email}`}>
+        <a className="email" href={`mailto:${profile.email}`}>
           {profile.email}
         </a>
         <button
           type="button"
-          className={`copy${copied ? ' is-copied' : ''}`}
+          className={`btn btn-small copy${copied ? ' is-copied' : ''}`}
           onClick={copy}
           aria-label="Copy email address"
         >
@@ -57,22 +62,15 @@ export default function Contact() {
           {copied ? 'Email address copied' : ''}
         </span>
       </div>
-      <ul className="contact-links reveal">
-        <li>
-          <a className="link" href={profile.github} target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-        </li>
-        <li>
-          <a className="link" href={profile.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          <a className="link" href={profile.resume} target="_blank" rel="noreferrer">
-            Résumé
-          </a>
-        </li>
+
+      <ul className="contact-links label reveal">
+        {links.map((link) => (
+          <li key={link.label}>
+            <a className="link" href={link.href} target="_blank" rel="noreferrer">
+              {link.label} ↗
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   )

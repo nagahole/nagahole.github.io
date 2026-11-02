@@ -2,25 +2,21 @@ import { education } from '../data'
 
 export default function Education() {
   return (
-    <div className="entry reveal">
-      <div className="entry-head">
-        <h3 className="entry-title">{education.school}</h3>
-        <span className="entry-period">{education.period}</span>
+    <div className="panel edu reveal">
+      <div className="edu-head">
+        <div>
+          <h3 className="row-title">{education.school}</h3>
+          <p className="row-summary">{education.degree}</p>
+        </div>
+        <span className="label">{education.period}</span>
       </div>
-      <p className="entry-meta">{education.degree}</p>
-      <dl className="details">
-        <div>
-          <dt>Results</dt>
-          <dd>{education.results}</dd>
-        </div>
-        <div>
-          <dt>Awards</dt>
-          <dd>{education.awards}</dd>
-        </div>
-        <div>
-          <dt>Activities</dt>
-          <dd>{education.activities}</dd>
-        </div>
+      <dl className="edu-rows">
+        {education.rows.map((row) => (
+          <div key={row.key}>
+            <dt className="label faint">{row.key}</dt>
+            <dd>{row.value}</dd>
+          </div>
+        ))}
       </dl>
     </div>
   )
