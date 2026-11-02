@@ -138,4 +138,3 @@ export const education = {
   activities: 'Mentoring subcommittee, Sydney Competitive Programming Club',
 }
 
-export const outside = 'Outside of work I speedcube (17s average), box and lift.'

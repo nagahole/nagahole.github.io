@@ -1,4 +1,4 @@
-import { intro, outside, profile } from '../data'
+import { intro, profile } from '../data'
 import { stagger } from '../hooks'
 
 const links = [
@@ -9,7 +9,7 @@ const links = [
 ]
 
 export default function Intro() {
-  const paragraphs = [...intro, outside]
+  const paragraphs = intro
 
   return (
     <section className="intro" aria-label="Introduction">
