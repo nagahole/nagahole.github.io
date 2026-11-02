@@ -1,49 +1,88 @@
 :root {
-  --bg: #08090d;
-  --bg-1: #0c0e14;
-  --bg-2: #11131a;
-  --bg-3: #161922;
-  --border: #1c1f2a;
-  --border-strong: #2a2e3c;
-  --text: #d8dae3;
-  --text-dim: #8b8f9e;
-  --text-faint: #555968;
-  --accent: #5eead4;
-  --accent-soft: rgba(94, 234, 212, 0.12);
-  --accent-line: rgba(94, 234, 212, 0.35);
-  --amber: #fbbf24;
-  --red: #f87171;
+  --bg: #fbfbf9;
+  --bg-raised: #f2f2ef;
+  --text: #1a1a19;
+  --muted: #5c5c58;
+  --faint: #8f8f8a;
+  --border: #e5e5e0;
+  --accent: #2c6b57;
+  --header-bg: rgb(251 251 249 / 0.82);
 
-  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
-  --container: 1180px;
-  --pad-x: 32px;
-  --pad-y: 96px;
-
-  font: 15px/1.55 var(--sans);
+  font: 16px/1.65 var(--sans);
   color: var(--text);
   background: var(--bg);
-  color-scheme: dark;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #111112;
+    --bg-raised: #1a1a1c;
+    --text: #ececea;
+    --muted: #a3a39f;
+    --faint: #72726e;
+    --border: #262628;
+    --accent: #7fc1aa;
+    --header-bg: rgb(17 17 18 / 0.8);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #111112;
+  --bg-raised: #1a1a1c;
+  --text: #ececea;
+  --muted: #a3a39f;
+  --faint: #72726e;
+  --border: #262628;
+  --accent: #7fc1aa;
+  --header-bg: rgb(17 17 18 / 0.8);
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
 }
 
 body {
-  overflow-x: hidden;
+  background: var(--bg);
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
 }
 
 a {
@@ -56,6 +95,7 @@ button {
   color: inherit;
   background: none;
   border: 0;
+  padding: 0;
   cursor: pointer;
 }
 
@@ -65,6 +105,29 @@ button {
 }
 
 :focus-visible {
-  outline: 1px solid var(--accent);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
 }

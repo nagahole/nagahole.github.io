@@ -1,29 +1,47 @@
 import './App.css'
-import Nav from './components/Nav'
-import Hero from './components/Hero'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
-import Stack from './components/Stack'
+import Header from './components/Header'
+import Intro from './components/Intro'
+import Section from './components/Section'
+import ExperienceList from './components/ExperienceList'
+import ProjectList from './components/ProjectList'
+import Education from './components/Education'
 import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { profile } from './data'
+import { useRevealOnScroll } from './hooks'
 
 export default function App() {
+  useRevealOnScroll()
+
   return (
-    <div className="app">
-      <div className="grid-bg" aria-hidden />
-      <div className="scanlines" aria-hidden />
+    <>
+      <Header />
 
-      <Nav />
-
-      <main className="main">
-        <Hero />
-        <Projects />
-        <Experience />
-        <Stack />
-        <Contact />
+      <main id="top" className="page">
+        <Intro />
+        <Section id="experience" title="Experience">
+          <ExperienceList />
+        </Section>
+        <Section id="projects" title="Projects">
+          <ProjectList />
+        </Section>
+        <Section id="education" title="Education">
+          <Education />
+        </Section>
+        <Section id="contact" title="Contact">
+          <Contact />
+        </Section>
       </main>
 
-      <Footer />
-    </div>
+      <footer className="footer">
+        <div className="page footer-inner">
+          <span>
+            © {new Date().getFullYear()} {profile.name}
+          </span>
+          <a className="link" href="#top">
+            Back to top
+          </a>
+        </div>
+      </footer>
+    </>
   )
 }

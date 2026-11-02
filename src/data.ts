@@ -1,205 +1,141 @@
-export type Project = {
-  id: string
-  name: string
-  role: string
-  desc: string
-  stack: string[]
-  year: string
-  href: string
-  type: string
-}
-
-export type ExperienceEntry = {
-  id: string
-  org: string
-  role: string
-  loc: string
-  period: string
-  desc: string
-}
-
-export type StackGroup = {
+export type Link = {
   label: string
-  items: string[]
+  href: string
 }
 
-export type ContactItem = {
-  key: string
-  value: string
-  href?: string
-  external?: boolean
+export type Role = {
+  title: string
+  org: string
+  orgHref?: string
+  location: string
+  period: string
+  summary: string
+}
+
+export type Project = {
+  name: string
+  summary: string
+  tech: string
+  year: string
+  links: Link[]
+  status?: string
 }
 
 export const profile = {
   name: 'Rick Wang',
-  handle: 'NAGAHOLE',
-  version: 'v2026.2',
+  role: 'Software engineer in San Francisco',
   email: 'rickwang121@gmail.com',
-  github: 'nagahole',
-  linkedin: 'rick-wang-nz',
-  resumeHref: '/resume.pdf',
-  tagline: 'SOFTWARE ENGINEER · SAN FRANCISCO',
-  status: 'building a C++20 ITCH feed handler',
+  github: 'https://github.com/nagahole',
+  linkedin: 'https://linkedin.com/in/rick-wang-nz',
+  resume: '/resume.pdf',
 }
+
+export const intro: string[] = [
+  "I'm a software engineer at Strala, a Series A insurance startup, where I build full-stack features from scoping with operations through to production.",
+  'Before that I interned at Jane Street and studied computer science at the University of Sydney, where I also tutored systems programming and distributed systems. On the side I like building things that have to be both fast and correct. At the moment that’s a C++ feed handler for Nasdaq market data.',
+]
+
+export const experience: Role[] = [
+  {
+    title: 'Software Engineer',
+    org: 'Strala',
+    location: 'San Francisco',
+    period: 'Oct 2026 – now',
+    summary:
+      'Full-stack features end to end, from scoping with operations to production. Python, React and TypeScript on GCP, with Terraform and Docker.',
+  },
+  {
+    title: 'Software Engineer Intern',
+    org: 'Jane Street',
+    location: 'Hong Kong',
+    period: 'Dec 2025 – Feb 2026',
+    summary:
+      'Built OCaml RPC servers that split large backtesting jobs into shards and distribute them across workers, part of a team effort that cut run times from days to hours. Presented the design at internal tech talks.',
+  },
+  {
+    title: 'Tutor',
+    org: 'University of Sydney',
+    location: 'Sydney',
+    period: 'Feb – Jul 2025',
+    summary:
+      'Ran weekly tutorials for Systems Programming in C and Distributed Systems, covering memory management, concurrency, networking and consensus.',
+  },
+  {
+    title: 'Freelance Web Developer',
+    org: 'SoleAgents',
+    orgHref: 'https://soleagents.co.nz/',
+    location: 'Remote',
+    period: 'Jan 2025 – now',
+    summary:
+      'Built and maintain a real estate website with property search, mailing lists and enquiry forms.',
+  },
+  {
+    title: 'Software Developer',
+    org: 'University of Sydney',
+    location: 'Sydney',
+    period: 'Mar – Dec 2024',
+    summary:
+      'Built chemistry lab simulations in Unity with biochemistry staff for online classes, modelling how pH, volume and concentration change as liquids are transferred.',
+  },
+]
 
 export const projects: Project[] = [
   {
-    id: '01',
     name: 'ITCH Feed Handler',
-    role: 'Market data · order books',
-    desc: 'Building a parser and limit order book for Nasdaq TotalView-ITCH 5.0 market data, designed to process a full trading day from a memory-mapped file. Tested under AddressSanitizer and UBSan, with profiling and a lock-free pipeline planned.',
-    stack: ['C++20', 'CMake', 'Catch2'],
+    summary:
+      'A parser and limit order book for Nasdaq TotalView-ITCH 5.0 market data, built to learn modern C++. Tested under sanitizers, with profiling and a lock-free pipeline to come.',
+    tech: 'C++20',
     year: '2026',
-    href: 'https://github.com/nagahole/cpp-itch',
-    type: 'Systems · In progress',
+    status: 'In progress',
+    links: [{ label: 'Code', href: 'https://github.com/nagahole/cpp-itch' }],
   },
   {
-    id: '02',
     name: 'Byte Blasters',
-    role: 'Roguelike shooter',
-    desc: 'Built solo in 10 weeks: 16k lines of C# across 21 modules, with modular weapons, node-graph enemy AI, and a GPU compute shader for fog of war. Playable on itch.io.',
-    stack: ['C#', 'Unity', 'HLSL'],
+    summary:
+      'A roguelike shooter I built solo over ten weeks: 16k lines of C# with modular weapons, node-graph enemy AI and a GPU fog of war.',
+    tech: 'C#, Unity',
     year: '2023',
-    href: 'https://github.com/nagahole/byte-blasters',
-    type: 'Game · Solo',
-  },
-  {
-    id: '03',
-    name: 'Generic Minimaxer',
-    role: 'Game-tree search engine',
-    desc: 'Game-agnostic minimax engine with alpha-beta pruning, iterative deepening, and a hard time limit using cancellable worker threads. Implement a game’s rules and get a bot.',
-    stack: ['Python', 'Algorithms'],
-    year: '2025',
-    href: 'https://github.com/nagahole/generic_minimaxer',
-    type: 'Algorithms · Solo',
-  },
-  {
-    id: '04',
-    name: 'PocketWise',
-    role: 'Mobile finance tracker',
-    desc: 'Budgeting app published on the App Store from Feb 2023 to Feb 2024, with Google & Apple sign-in, real-time sync, and spending analytics.',
-    stack: ['React Native', 'Firebase', 'JavaScript'],
-    year: '2023',
-    href: 'https://github.com/nagahole/pocketwise',
-    type: 'Mobile · Shipped',
-  },
-  {
-    id: '05',
-    name: 'CS Capstone (Advanced)',
-    role: 'ML image synthesis',
-    desc: 'Team project synthesising CT scans from MRI scans, run through the full development lifecycle with industry mentors.',
-    stack: ['Python', 'Machine Learning', 'GCP'],
-    year: '2025',
-    href: 'https://github.com/COMP3988/COMP3988_F12_01',
-    type: 'Capstone · Team',
-  },
-  {
-    id: '06',
-    name: 'Scope',
-    role: 'Aim trainer',
-    desc: 'FPS aim trainer with 17 scenarios and sensitivity presets for 20 games, released free on itch.io.',
-    stack: ['C#', 'Unity'],
-    year: '2020',
-    href: 'https://github.com/nagahole/scope',
-    type: 'Game · Solo',
-  },
-]
-
-export const experience: ExperienceEntry[] = [
-  {
-    id: '01',
-    org: 'Strala',
-    role: 'Software Engineer',
-    loc: 'San Francisco',
-    period: 'Oct 2026 — Present',
-    desc: 'Building full-stack features end to end at a Series A AI insurance startup, from scoping with operations to production. Python, React/TypeScript, GCP, Terraform, and Docker.',
-  },
-  {
-    id: '02',
-    org: 'Jane Street',
-    role: 'Software Engineer Intern',
-    loc: 'Hong Kong',
-    period: 'Dec 2025 — Feb 2026',
-    desc: 'Built OCaml RPC servers to split large backtesting jobs into shards and distribute them across workers, part of a team effort that cut run times from days to hours. Presented the sharding design and implementation at internal tech talks.',
-  },
-  {
-    id: '03',
-    org: 'University of Sydney',
-    role: 'Tutor — COMP2017 / COMP3221',
-    loc: 'Sydney',
-    period: 'Feb 2025 — Jul 2025',
-    desc: 'Ran weekly tutorials for Systems Programming in C and Distributed Systems, covering memory management, concurrency, networking, and consensus protocols.',
-  },
-  {
-    id: '04',
-    org: 'SoleAgents',
-    role: 'Freelance Web Developer',
-    loc: 'Remote',
-    period: 'Jan 2025 — Present',
-    desc: 'Built and maintain a client’s real estate website, with property search, mailing lists, and enquiry forms.',
-  },
-  {
-    id: '05',
-    org: 'University of Sydney',
-    role: 'Software Developer',
-    loc: 'Sydney',
-    period: 'Mar 2024 — Dec 2024',
-    desc: 'Built chemistry lab simulations in Unity (C#) with biochemistry staff for online lab classes, modelling how pH, volume, and concentration change during liquid transfers in real-time 3D.',
-  },
-]
-
-export const stackGroups: StackGroup[] = [
-  {
-    label: 'languages',
-    items: ['OCaml', 'C', 'C++', 'Python', 'C#', 'TypeScript', 'Java'],
-  },
-  {
-    label: 'systems',
-    items: [
-      'Concurrency',
-      'Parallelism',
-      'Distributed Systems',
-      'Networking',
-      'Memory Management',
-      'RPC',
+    links: [
+      { label: 'Code', href: 'https://github.com/nagahole/byte-blasters' },
+      { label: 'Play', href: 'https://nagahole.itch.io/byte-blasters-alpha-testing' },
     ],
   },
   {
-    label: 'tools',
-    items: ['Git', 'Linux', 'Docker', 'GCP', 'Terraform', 'React', 'Unity'],
+    name: 'Generic Minimaxer',
+    summary:
+      'A game-agnostic minimax engine with alpha-beta pruning, iterative deepening and hard time limits. Describe a game’s rules and it plays.',
+    tech: 'Python',
+    year: '2025',
+    links: [{ label: 'Code', href: 'https://github.com/nagahole/generic_minimaxer' }],
+  },
+  {
+    name: 'PocketWise',
+    summary:
+      'A budgeting app with Google and Apple sign-in and real-time sync. It was on the App Store from February 2023 to February 2024.',
+    tech: 'React Native, Firebase',
+    year: '2023',
+    links: [{ label: 'Code', href: 'https://github.com/nagahole/pocketwise' }],
+  },
+  {
+    name: 'Scope',
+    summary: 'A free FPS aim trainer with 17 scenarios and sensitivity presets for 20 games.',
+    tech: 'C#, Unity',
+    year: '2020',
+    links: [
+      { label: 'Code', href: 'https://github.com/nagahole/scope' },
+      { label: 'Download', href: 'https://nagahole.itch.io/scope' },
+    ],
   },
 ]
 
-export const contactItems: ContactItem[] = [
-  {
-    key: 'email',
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-  },
-  {
-    key: 'github',
-    value: `@${profile.github}`,
-    href: `https://github.com/${profile.github}`,
-    external: true,
-  },
-  {
-    key: 'linkedin',
-    value: profile.linkedin,
-    href: `https://linkedin.com/in/${profile.linkedin}`,
-    external: true,
-  },
-  {
-    key: 'location',
-    value: 'San Francisco · Pacific Time',
-  },
-]
+export const education = {
+  school: 'University of Sydney',
+  degree: 'Bachelor of Computing (Computer Science), Cybersecurity minor',
+  period: 'Graduated Dec 2025',
+  results: 'WAM 86.6 (High Distinction) · ATAR 99.95',
+  awards:
+    "GS Caird Scholarship in Computer Science, Academic Merit Prize, Dean's List, Chancellor's Award, Dalyell Scholar",
+  activities: 'Mentoring subcommittee, Sydney Competitive Programming Club',
+}
 
-export const systemInfo: { key: string; value: string }[] = [
-  { key: 'now', value: 'SWE @ Strala' },
-  { key: 'prev', value: 'SWE Intern @ Jane Street' },
-  { key: 'focus', value: 'systems · performance · market data' },
-  { key: 'edu', value: 'USyd · CS / Cybersecurity Minor' },
-  { key: 'scores', value: 'WAM 86.6 (HD) · ATAR 99.95' },
-  { key: 'awards', value: "GS Caird · High Honour · Dean's List" },
-  { key: 'cube', value: '17s average' },
-]
+export const outside = 'Outside of work I speedcube (17s average), box and lift.'
