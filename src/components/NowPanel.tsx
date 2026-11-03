@@ -49,10 +49,6 @@ function SideRow() {
 export default function NowPanel() {
   return (
     <aside className="pane now reveal" style={stagger(3)} aria-label="Now">
-      <div className="pane-bar label">
-        <span>Now</span>
-        <span className="live-dot" aria-hidden />
-      </div>
       <dl className="now-rows">
         {now.map((row) => (
           <div key={row.key}>

@@ -67,7 +67,7 @@ export const hero = {
 }
 
 export const now: NowRow[] = [
-  { key: 'Work', value: 'Software engineer, Strala' },
+  { key: 'Now', value: 'Software engineer, Strala' },
   { key: 'Before', value: 'Jane Street, Hong Kong' },
   { key: 'Studied', value: 'Computer science, University of Sydney' },
 ]

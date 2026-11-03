@@ -128,22 +128,6 @@
     0 40px 80px -48px rgb(0 0 0 / 0.9);
 }
 
-.live-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--signal);
-  box-shadow: 0 0 0 0 rgb(127 216 191 / 0.4);
-  animation: pulse 3s ease-out infinite;
-}
-
-@keyframes pulse {
-  70%,
-  100% {
-    box-shadow: 0 0 0 6px rgb(127 216 191 / 0);
-  }
-}
-
 /* Reveal on scroll: fade, lift and un-blur, staggered by --i */
 .reveal {
   opacity: 0;
@@ -347,21 +331,6 @@
 }
 
 /* Now panel: a quiet key/value readout */
-.pane-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--line);
-  font-size: 10.5px;
-}
-
-.pane-bar-right {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .now-rows {
   padding: 4px 16px 6px;
 }
