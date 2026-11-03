@@ -20,6 +20,8 @@ export type Project = {
   year: string
   links: Link[]
   status?: string
+  // The repo's commits are a whole team's, not just mine
+  team?: boolean
 }
 
 export type Stat = {
@@ -156,6 +158,7 @@ export const projects: Project[] = [
       'Lead developer on a six-person capstone generating synthetic CT from MRI for radiotherapy planning, adapting a 3D transformer-diffusion model and its training, inference and evaluation pipeline.',
     tech: ['PyTorch', 'MONAI', 'Python'],
     year: '2025',
+    team: true,
     links: [{ label: 'Code', href: 'https://github.com/COMP3988/COMP3988_F12_01' }],
   },
   {

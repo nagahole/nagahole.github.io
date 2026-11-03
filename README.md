@@ -18,12 +18,17 @@ My personal portfolio site, with projects, experience and my resume.
 
 ```
 src/
-├── data.ts          # All site content: profile, projects, experience, skills
-├── components/      # One component per section (Hero, Projects, Experience, ...)
+├── data.ts          # All site content: profile, experience, projects, journey, stats
+├── activity.ts      # Generated: each project's commit activity, for its card's line
+├── mapData.ts       # Generated: the dot-matrix land mask for the journey map
+├── components/      # One component per section (Hero, Journey, Projects, ...)
 ├── App.tsx
 └── index.css
+scripts/
+└── update-activity.py
 public/
-└── resume.pdf
+├── resume.pdf
+└── og.png           # Link preview image
 ```
 
 Content lives in `src/data.ts`, so updating the site rarely means touching a component.
@@ -34,4 +39,10 @@ Content lives in `src/data.ts`, so updating the site rarely means touching a com
 npm install
 npm run dev      # local dev server
 npm run build    # type-check and build to dist/
+```
+
+Each project card's line is that repo's real commit activity. To refresh it (needs the GitHub CLI, signed in):
+
+```bash
+python3 scripts/update-activity.py
 ```

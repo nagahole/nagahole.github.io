@@ -1,3 +1,4 @@
+import { activity } from '../activity'
 import { projects, type Project } from '../data'
 import { roman } from '../format'
 import { stagger } from '../hooks'
@@ -5,6 +6,7 @@ import { Spark } from './Viz'
 
 function Card({ project, index }: { project: Project; index: number }) {
   const [primary, ...extra] = project.links
+  const history = activity[project.name]
 
   return (
     <li className="card reveal" style={stagger(index % 3)}>
@@ -15,7 +17,15 @@ function Card({ project, index }: { project: Project; index: number }) {
         <span className="faint">{project.status ?? project.year}</span>
       </div>
 
-      <Spark seed={project.name} />
+      {/* The line is the repo's real commit activity, scaled to fit */}
+      <div className="spark-wrap">
+        <Spark values={history?.values} seed={project.name} />
+        {history && (
+          <span className="spark-caption label">
+            {history.commits} {project.team ? 'team commits' : 'commits'} · {history.period}
+          </span>
+        )}
+      </div>
 
       <h3 className="card-name">
         {/* The ::after of this link covers the whole card, so the card is clickable */}

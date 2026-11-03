@@ -1,5 +1,5 @@
 import './App.css'
-import FlowField from './components/FlowField'
+import Streaks from './components/Streaks'
 import Hero from './components/Hero'
 import Section from './components/Section'
 import Experience from './components/Experience'
@@ -16,14 +16,14 @@ export default function App() {
 
   return (
     <>
-      {/* Background: a drifting, blurred light field, a fine grid, then the line ribbon */}
+      {/* Background: a drifting, blurred light field, a fine grid, then falling streaks */}
       <div className="aura" aria-hidden>
         <span />
         <span />
         <span />
       </div>
       <div className="grid-bg" aria-hidden />
-      <FlowField />
+      <Streaks />
 
       <main className="page">
         <Hero />

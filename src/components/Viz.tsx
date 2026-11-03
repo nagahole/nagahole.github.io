@@ -52,10 +52,11 @@ function curve(points: [number, number][]) {
   return d
 }
 
-export function Spark({ seed }: { seed: string }) {
+// An area chart of `values` (0..1), or a seeded random walk when there's no data
+export function Spark({ values, seed }: { values?: number[]; seed: string }) {
   const id = useId()
-  const values = walk(seed, 26)
-  const points = values.map((v, i): [number, number] => [(i / (values.length - 1)) * 300, 66 - v * 50])
+  const series = values ?? walk(seed, 26)
+  const points = series.map((v, i): [number, number] => [(i / (series.length - 1)) * 300, 66 - v * 50])
   const line = `M${points[0][0]},${points[0][1]}${curve(points)}`
   const [endX, endY] = points[points.length - 1]
 
